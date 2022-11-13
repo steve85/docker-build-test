@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SteveLabs.DockerBuildTest": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
