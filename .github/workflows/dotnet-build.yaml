@@ -23,8 +23,6 @@ jobs:
         run: dotnet restore
       - name: Build Project
         run: dotnet build --configuration Release --no-restore
-      - name: Get directory
-        run: ls
       - name: Test Project
         run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
       - name: Upload Test Report Artifact
