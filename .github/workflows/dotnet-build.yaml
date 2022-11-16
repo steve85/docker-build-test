@@ -21,23 +21,8 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
         run: dotnet restore
-      - name: Build
+      - name: Build Porject
         run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
-
-  test:
-    name: Test .NET Project
-    needs: build
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '6.0.x' ]
-    defaults:
-      run:
-        working-directory: Source/SteveLabs.DockerBuildTest
-
-    steps:
-      - name: Test
+      - name: Test Project
         run: dotnet test --no-restore --verbosity normal
 
