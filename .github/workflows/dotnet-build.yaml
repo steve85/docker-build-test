@@ -31,3 +31,16 @@ jobs:
         with:
           name: test-results
           path: /home/runner/work/docker-build-test/docker-build-test/Source/SteveLabs.DockerBuildTest.MSTest/TestResults/test-results.trx
+
+  report:
+    name: Test Report
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: dorny/test-reporter@v1
+      needs: build
+      with:
+        artifact: test-results            # artifact name
+        name: MSTest Results              # Name of the check run which will be created
+        path: 'test-results.trx'          # Path to test results (inside artifact .zip)
+        reporter: dotnet-trx              # Format of test results
