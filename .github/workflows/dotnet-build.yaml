@@ -28,7 +28,7 @@ jobs:
 
   test:
     name: Test .NET Project
-    needs: buld
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
