@@ -24,4 +24,4 @@ jobs:
       - name: Build Porject
         run: dotnet build --configuration Release --no-restore
       - name: Test Project
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
