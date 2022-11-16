@@ -25,4 +25,3 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test Project
         run: dotnet test --no-restore --verbosity normal
-
