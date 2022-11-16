@@ -1,4 +1,4 @@
-name: Build and Test .NET
+name: 'Build and Test .NET'
 
 on: [push]
 
@@ -21,7 +21,13 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
         run: dotnet restore
-      - name: Build Porject
+      - name: Build Project
         run: dotnet build --configuration Release --no-restore
       - name: Test Project
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      - name: Upload Test Report Artifact
+        uses: actions/upload-artifact@v2  # upload test results
+        if: success() || failure()        # run this step even if previous step failed
+        with:
+          name: test-results
+          path: /home/runner/work/docker-build-test/docker-build-test/Source/SteveLabs.DockerBuildTest.MSTest/TestResults/test-results.trx
