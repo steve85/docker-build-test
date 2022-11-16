@@ -25,3 +25,19 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+
+  test:
+    name: Test .NET Project
+    needs: buld
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '6.0.x' ]
+    defaults:
+      run:
+        working-directory: Source/SteveLabs.DockerBuildTest
+
+    steps:
+      - name: Test
+        run: echo "hello world"
+
