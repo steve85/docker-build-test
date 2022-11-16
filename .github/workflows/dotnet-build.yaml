@@ -25,6 +25,8 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test Project
         run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      - name: Get directory
+        run: ls
       - name: Upload Test Report Artifact
         uses: actions/upload-artifact@v2  # upload test results
         if: success() || failure()        # run this step even if previous step failed
