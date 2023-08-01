@@ -1,4 +1,4 @@
-name: 'Test Report'
+name: 'Unit Test Report'
 on:
   workflow_run:
     workflows: ['Build and Test .NET']                     # runs after CI workflow
@@ -6,11 +6,12 @@ on:
       - completed
 jobs:
   report:
+   name: Publish Unit Test Results
     runs-on: ubuntu-latest
     steps:
     - uses: dorny/test-reporter@v1
       with:
-        artifact: test-results            # artifact name
-        name: MSTest Results              # Name of the check run which will be created
+        artifact: test-results            # Artifact name
+        name: Unit Test Results           # Name of the check run which will be created
         path: 'test-results.trx'          # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
