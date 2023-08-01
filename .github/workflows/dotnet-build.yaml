@@ -31,4 +31,4 @@ jobs:
         if: ${{ always() }}
         with:
           name: Unit Test Results
-          path: test-results.trx
+          path: ${{ github.workspace }}/UnitTestResults/test-results.trx
