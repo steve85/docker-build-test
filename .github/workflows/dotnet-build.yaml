@@ -26,9 +26,9 @@ jobs:
       - name: Run Unit Tests
         run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory "UnitTestResults"
       - name: Upload Test Report Artifact
-        uses: actions/upload-artifact@v2  # upload test results
+        uses: actions/upload-artifact@v3  # upload test results
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
         with:
           name: Unit Test Results
-          path: UnitTestResults
+          path: UnitTestResults/test-results.trx
