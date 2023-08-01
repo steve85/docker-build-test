@@ -35,10 +35,10 @@ jobs:
   report:
     name: Test Report
     runs-on: ubuntu-latest
+    needs: build
     
     steps:
-    - uses: dorny/test-reporter@v1
-      needs: build
+    - uses: dorny/test-reporter@v1      
       with:
         artifact: test-results            # artifact name
         name: MSTest Results              # Name of the check run which will be created
