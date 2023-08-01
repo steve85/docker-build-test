@@ -6,12 +6,12 @@ on:
       - completed
 jobs:
   report:
-    name: Publish Unit Test Results
+    name: Generate Unit Test Report
     runs-on: ubuntu-latest
     steps:
     - uses: dorny/test-reporter@v1
       with:
-        artifact: test-results            # Artifact name
+        artifact: Unit Test Results       # Artifact name
         name: Unit Test Results           # Name of the check run which will be created
         path: 'test-results.trx'          # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
