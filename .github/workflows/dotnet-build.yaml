@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build .NET Project
+    name: Build and Test .NET Project
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -31,16 +31,10 @@ jobs:
         with:
           name: test-results
           path: /home/runner/work/docker-build-test/docker-build-test/Source/SteveLabs.DockerBuildTest.MSTest/TestResults/test-results.trx
-
-  report:
-    name: Test Report
-    runs-on: ubuntu-latest
-    needs: build
-    
-    steps:
-    - uses: dorny/test-reporter@v1      
-      with:
-        artifact: test-results            # artifact name
-        name: MSTest Results              # Name of the check run which will be created
-        path: 'test-results.trx'          # Path to test results (inside artifact .zip)
-        reporter: dotnet-trx              # Format of test results
+      - name: Generate Test Report
+        uses: dorny/test-reporter@v1      
+        with:
+          artifact: test-results            # artifact name
+          name: MSTest Results              # Name of the check run which will be created
+          path: 'test-results.trx'          # Path to test results (inside artifact .zip)
+          reporter: dotnet-trx              # Format of test results
