@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build and Test .NET Project
+    name: Build and Test .NET
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,15 +19,16 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
+      - name: Restore Packages
         run: dotnet restore
-      - name: Build Project
+      - name: Build Solution
         run: dotnet build --configuration Release --no-restore
-      - name: Test Project
-        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      - name: Run Unit Tests
+        run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory "TestResults-${{ matrix.dotnet-version }}"
       - name: Upload Test Report Artifact
         uses: actions/upload-artifact@v2  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
         with:
-          name: test-results
-          path: /home/runner/work/docker-build-test/docker-build-test/Source/SteveLabs.DockerBuildTest.MSTest/TestResults/test-results.trx
+          name: TestResults-${{ matrix.dotnet-version }}
+          path: TestResults-${{ matrix.dotnet-version }}
