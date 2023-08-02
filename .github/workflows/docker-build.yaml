@@ -4,6 +4,8 @@ on:
     workflows: ['Build and Test .NET']                     # runs after CI workflow
     types:
       - completed
+    branches:
+      - 'main'
 jobs:
   build_image:
     name: Build and push docker image
