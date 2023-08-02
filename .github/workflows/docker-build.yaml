@@ -30,6 +30,6 @@ jobs:
         with:
           context: ${{ github.workspace }}/Source/SteveLabs.DockerBuildTest
           file: ${{ github.workspace }}/Source/SteveLabs.DockerBuildTest/Dockerfile
-          push: false
-          tags: test
-          labels: test
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
